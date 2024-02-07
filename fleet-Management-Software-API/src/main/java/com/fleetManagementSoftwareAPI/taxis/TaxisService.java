@@ -1,9 +1,10 @@
 package com.fleetManagementSoftwareAPI.taxis;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TaxisService {
@@ -15,8 +16,9 @@ public class TaxisService {
         this.taxiRepository = taxiRepository;
     }
 
-    public List<Taxis> getTaxis(){
-        return taxiRepository.findAll();
+    public Page<Taxis> getTaxis(int initPage, int pageSize){
+        Pageable pageNumber = PageRequest.of(initPage, pageSize);
+        return taxiRepository.findAll(pageNumber);
     }
 
 }
