@@ -1,13 +1,22 @@
 package com.fleetManagementSoftwareAPI.taxis;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fleetManagementSoftwareAPI.trajectories.Trajectories;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity // permite que Spring Data JPA pueda manipular la tabla de la db
+@Table(name = "taxis")
 public class Taxis {
     @Id
     private Long id;
     private String plate;
+
+    @OneToMany(
+            mappedBy = "taxi",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Trajectories> trajectories;
 
     public Taxis() {
     }
