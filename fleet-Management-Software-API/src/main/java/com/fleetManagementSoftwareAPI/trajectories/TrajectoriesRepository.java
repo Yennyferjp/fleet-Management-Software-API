@@ -5,11 +5,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public interface TrajectoriesRepository extends JpaRepository<Trajectories, Long> {
 
-    Page<Trajectories> findByTaxiIdAndDate(Long taxi_id, LocalDate date, Pageable page);
+    Page<Trajectories> findByTaxiIdAndDateGreaterThanEqualAndDateBefore(
+            Long taxiId, LocalDate startDate, LocalDate endDate, Pageable pageable
+    );
+// >= 2008-02-02 AND date < 2008-02-03
 }
 
