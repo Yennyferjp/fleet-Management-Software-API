@@ -20,6 +20,5 @@ public class TaxisService {
         Pageable pageNumber = PageRequest.of(initPage, pageSize);
         return taxiRepository.findAll(pageNumber);
     }
-
 }
 
