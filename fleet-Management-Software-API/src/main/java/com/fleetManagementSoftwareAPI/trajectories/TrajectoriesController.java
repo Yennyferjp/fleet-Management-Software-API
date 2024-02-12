@@ -24,14 +24,18 @@ public class TrajectoriesController {
     }
 
     @GetMapping()
-    public Page<Trajectories> getTrajectories(@RequestParam Long taxi_id,
-                                              @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                                              @RequestParam(defaultValue = "0") int initPage,
-                                              @RequestParam(defaultValue = "10") int pageSize) {
+    public Page<Trajectories> getTrajectories(
+            @RequestParam Long taxi_id,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @RequestParam(defaultValue = "0") int initPage,
+            @RequestParam(defaultValue = "10") int pageSize) {
 
-        return trajectoriesServices.getTrajectories(taxi_id, date, initPage, pageSize);
+        if (startDate != null) {
+            return trajectoriesServices.getTrajectories(taxi_id, startDate, initPage, pageSize);
+        } else {
+            return null;
+        }
     }
-
 
 
 

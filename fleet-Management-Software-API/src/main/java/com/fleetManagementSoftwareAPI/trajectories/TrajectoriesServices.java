@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Service
 public class TrajectoriesServices {
@@ -19,9 +18,12 @@ public class TrajectoriesServices {
         this.trajectoriesRepository = trajectoriesRepository;
     }
 
-    public Page<Trajectories> getTrajectories(Long taxi_id, LocalDate date, int initPage, int pageSize) {
-        Pageable page = PageRequest.of(initPage, pageSize);
-        return trajectoriesRepository.findByTaxiIdAndDate(taxi_id, date, page);
 
-    }
+        public Page<Trajectories> getTrajectories(Long taxi_id, LocalDate startDate, int initPage, int pageSize) {
+            Pageable page = PageRequest.of(initPage, pageSize);
+            LocalDate endDate = startDate.plusDays(1);
+            return trajectoriesRepository.findByTaxiIdAndDateGreaterThanEqualAndDateBefore(taxi_id, startDate, endDate, page);
+        }
+
+
 }
