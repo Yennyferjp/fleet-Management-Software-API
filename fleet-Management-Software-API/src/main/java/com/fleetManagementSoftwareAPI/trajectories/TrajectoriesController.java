@@ -31,12 +31,11 @@ public class TrajectoriesController {
             @RequestParam(defaultValue = "10") int pageSize) {
 
         if (startDate != null) {
-            return trajectoriesServices.getTrajectories(taxi_id, startDate, initPage, pageSize);
+            LocalDateTime starDateTime = startDate.atStartOfDay();
+            return trajectoriesServices.getTrajectories(taxi_id, starDateTime, initPage, pageSize);
         } else {
             return null;
         }
     }
-
-
 
 }
