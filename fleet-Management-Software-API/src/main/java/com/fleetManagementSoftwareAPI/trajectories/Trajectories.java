@@ -4,6 +4,7 @@ import com.fleetManagementSoftwareAPI.taxis.Taxis;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity (name = "trajectories")
 public class Trajectories {
@@ -11,7 +12,7 @@ public class Trajectories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long taxi_id;
-    private LocalDate date;
+    private LocalDateTime date;
     private double latitude;
     private double longitude;
     @ManyToOne
@@ -21,7 +22,7 @@ public class Trajectories {
     public Trajectories() {
     }
 
-    public Trajectories(Long id, Long taxi_id, LocalDate date, double latitude, double longitude, Taxis taxi) {
+    public Trajectories(Long id, Long taxi_id, LocalDateTime date, double latitude, double longitude, Taxis taxi) {
         this.id = id;
         this.taxi_id = taxi_id;
         this.date = date;
@@ -62,11 +63,11 @@ public class Trajectories {
         this.longitude = longitude;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
