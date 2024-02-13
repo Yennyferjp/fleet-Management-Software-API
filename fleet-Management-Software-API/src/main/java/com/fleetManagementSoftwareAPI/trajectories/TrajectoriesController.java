@@ -26,7 +26,7 @@ public class TrajectoriesController {
     @GetMapping()
     public Page<Trajectories> getTrajectories(
             @RequestParam Long taxi_id,
-            @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @RequestParam(value = "startDate", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
             @RequestParam(defaultValue = "0") int initPage,
             @RequestParam(defaultValue = "10") int pageSize) {
 
