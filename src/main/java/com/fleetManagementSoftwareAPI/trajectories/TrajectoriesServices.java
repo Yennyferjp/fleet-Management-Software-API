@@ -25,5 +25,10 @@ public class TrajectoriesServices {
             return trajectoriesRepository.findByTaxiIdAndDateGreaterThanEqualAndDateBeforeOrderByDateDesc(taxi_id, startDate, endDate, page);
         }
 
+    public Page<Trajectories> getLastTrajectories(int initPage, int pageSize) {
+        Pageable page = PageRequest.of(initPage, pageSize);
+        return trajectoriesRepository.findLastTrajectories(page);
+    }
+
 
 }

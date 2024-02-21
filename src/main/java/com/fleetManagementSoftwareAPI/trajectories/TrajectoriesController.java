@@ -38,4 +38,12 @@ public class TrajectoriesController {
         }
     }
 
+    @GetMapping("/last")
+    public Page<Trajectories> getLastTrajectories(
+            @RequestParam(defaultValue = "0") int initPage,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        return trajectoriesServices.getLastTrajectories(initPage, pageSize);
+
+    }
+
 }
