@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @RestController
@@ -36,6 +37,14 @@ public class TrajectoriesController {
         } else {
             return null;
         }
+    }
+
+    @GetMapping("/last")
+    public Page<Trajectories> getLastTrajectories(
+            @RequestParam() int initPage,
+            @RequestParam() int pageSize) {
+        return trajectoriesServices.getLastTrajectories(initPage, pageSize);
+
     }
 
 }

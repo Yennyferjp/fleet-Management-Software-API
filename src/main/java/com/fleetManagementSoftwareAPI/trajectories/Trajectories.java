@@ -11,23 +11,26 @@ public class Trajectories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long taxi_id;
+    //private Long taxi_id;
     private LocalDateTime date;
     private double latitude;
     private double longitude;
+
+
+
     @ManyToOne
     @JoinColumn(name = "taxi_id", insertable = false, updatable = false)
     private Taxis taxi;
 
+
     public Trajectories() {
     }
 
-    public Trajectories(Long id, Long taxi_id, LocalDateTime date, double latitude, double longitude, Taxis taxi) {
-        this.id = id;
-        this.taxi_id = taxi_id;
-        this.date = date;
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Taxis getTaxi() {
+        return taxi;
+    }
+
+    public void setTaxi(Taxis taxi) {
         this.taxi = taxi;
     }
 
@@ -39,13 +42,6 @@ public class Trajectories {
         this.id = id;
     }
 
-    public Long getTaxi_id() {
-        return taxi_id;
-    }
-
-    public void setTaxi_id(Long taxi_id) {
-        this.taxi_id = taxi_id;
-    }
 
     public double getLatitude() {
         return latitude;
@@ -71,14 +67,5 @@ public class Trajectories {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return "Trajectories{" +
-                "id=" + id +
-                ", date=" + date +
-                ", taxi_id=" + taxi_id +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                '}';
-    }
+
 }
