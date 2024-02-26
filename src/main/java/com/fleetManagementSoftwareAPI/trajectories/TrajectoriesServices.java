@@ -2,11 +2,13 @@ package com.fleetManagementSoftwareAPI.trajectories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class TrajectoriesServices {
@@ -27,8 +29,9 @@ public class TrajectoriesServices {
 
     public Page<Trajectories> getLastTrajectories(int initPage, int pageSize) {
         Pageable page = PageRequest.of(initPage, pageSize);
-        return trajectoriesRepository.findLastTrajectories(page);
-    }
 
+        List<Trajectories>  trajectories = trajectoriesRepository.findLastTrajectories(page);
+        return new PageImpl<>(trajectories, page, trajectories.size());
+    }
 
 }

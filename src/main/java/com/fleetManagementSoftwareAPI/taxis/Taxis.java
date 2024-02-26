@@ -12,20 +12,9 @@ public class Taxis {
     private Long id;
     private String plate;
 
-    @OneToMany(
-            mappedBy = "taxi",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Set<Trajectories> trajectories;
-
     public Taxis() {
     }
 
-    public Taxis(Long id,
-                 String plate) {
-        this.id = id;
-        this.plate = plate;
-    }
 
     public Long getId() {
 
@@ -44,11 +33,5 @@ public class Taxis {
         this.plate = plate;
     }
 
-    @Override
-    public String toString() {
-        return "Taxis{" +
-                "id=" + id +
-                ", plate='" + plate + '\'' +
-                '}';
-    }
+
 }
