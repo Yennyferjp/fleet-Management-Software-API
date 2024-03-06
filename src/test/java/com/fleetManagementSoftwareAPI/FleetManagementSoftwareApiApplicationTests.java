@@ -36,7 +36,7 @@ class FleetManagementSoftwareApiApplicationTests {
 	@Test
 	@DisplayName("Test Taxis")
 	void testControllerTaxis() throws Exception {
-		MvcResult mvcResult = this.mockMvc.perform(get("/taxis?"))
+		MvcResult mvcResult = this.mockMvc.perform(get("/taxis"))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(jsonPath("$.content").isArray())
 				.andExpect(jsonPath("$.content", hasSize(10)))
@@ -49,11 +49,20 @@ class FleetManagementSoftwareApiApplicationTests {
 	@Test
 	@DisplayName("Test Trajectories")
 	void testControllerTrajectories() throws Exception {
-		MvcResult mvcResult = this.mockMvc.perform(get("/trajectories?taxi_id=6418&startDate=2008-02-02&initPage=0&pageSize=10"))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.content", hasSize(10)))
-				.andReturn();
+		String taxi_id = "6418";
+		String startDate = "2008-02-02";
+		String initPage = "0";
+		String pageSize = "10";
 
+		MvcResult mvcResult = this.mockMvc.perform(get("/trajectories")
+						.param("taxi_id", taxi_id)
+						.param("startDate", startDate)
+						.param("initPage", initPage)
+						.param("pageSize", pageSize))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.pageable.pageNumber").value(initPage))
+				.andExpect(jsonPath("$.pageable.pageSize").value(pageSize))
+				.andReturn();
 		assertEquals("application/json", mvcResult.getResponse().getContentType());
 	}
 }
